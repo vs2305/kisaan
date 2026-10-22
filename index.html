@@ -1,0 +1,1186 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    [hidden]:not([hidden=until-found i]) {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <title>Kisan Suraksha - pesticide label check (prototype)</title>
+  <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIktpc2FuIFN1cmFrc2hhIC0gcGVzdGljaWRlIGxhYmVsIGNoZWNrIiwgInNob3J0X25hbWUiOiAiS2lzYW4gU3VyYWtzaGEiLCAiZGVzY3JpcHRpb24iOiAiUGhvdG9ncmFwaCBvciBwaWNrIGEgcGVzdGljaWRlIGxhYmVsJ3MgdG94aWNpdHkgY29sb3VyIHRvIGhlYXIgcHJlY2F1dGlvbnMgYW5kIGVtZXJnZW5jeSBzdGVwcywgaW4gSGluZGksIE1hcmF0aGkgb3IgRW5nbGlzaC4iLCAic3RhcnRfdXJsIjogIi4iLCAic2NvcGUiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWVmMmVhIiwgInRoZW1lX2NvbG9yIjogIiNmZmZmZmYiLCAibGFuZyI6ICJoaSIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFGaDBsRVFWUjRuTzNjMjFFalFReUY0VGExK1VBVWtBNUVBdWxBRkJBUis4Q2E5V1hHMHoydHZram4vNTYzakYxMWppVGJzSWMwaWZ2WHgrL1J6d0g5ZkwxOEhFWS9oNVJTR3ZZa0NEeE9qU3BFMXg5SzZKR2paeG1hL3lCQ2p4cXR5OURzd1FrK0xMVXFndm1ERW55MFpGMkVPOHNISS94b3pUcGpKbTBpK0JqQllodFVid0RDajFFc3NsZFZBTUtQMFdvenVHdUZFSHpNYU05SlZMd0JDRDltdFNlYlJRVWcvSmhkYVVhekMwRDQ0VVZKVmsyL0J3Qzh5U29BMHgvZTVHWjJzd0NFSDE3bFpQZG1BUWcvdk52S01POEJJRzIxQUV4L1JIRXJ5NHNGSVB5SVppM1RuRUNRZGxVQXBqK2lXc28yR3dEU3pnckE5RWQwbHhsbkEwQWFCWUMwM3dKdy9rREZhZGJaQUpCR0FTRHRMaVhPSCtnNVpwNE5BR2tVQU5Jb0FLUWR1UCtoakEwQWFSUUEwaWdBcEZFQVNLTUFrRVlCSUkwQ1FCb0ZnRFFLQUdrVUFOSW9BS1JSQUVpakFKQkdBU0NOQWtBYUJZQTBDZ0JwRkFEU0tBQ2tVUUJJb3dDUVJnRWdqUUpBR2dXQU5Bb0FhUlFBMGlnQXBGRUFwSlJTK254K0gvMFVodmd6K2dsZ0ROWEFYNklBQWdqN09nb1FFSUhQUndHY0kreDFLSUJUMXNGL2VIc3lmVHd2S0lBelRIeGJGTUFCUXQ4T0JaZ1l3VytQQWt5STRQZERBU1pDOFB1akFJTVIrckVvd0NBRWZ3NzhNdHdBaEg4ZUZLQ2p6K2QzMC9CYmZYbWwraVZZU3B4QTNjd1lmTEFCdXJBSy84UGIwMVg0S1VNZE5rQkRGc0VuNEcyeEFScXBEZi9TdEwvMWI3RVBHNkNCbXZBVDVyNG9nS0VSd2JmWU5Nb29nSkc5UVJ3VmZQeWdBQVpLdzBqbzUwRUJLaEI4L3lqQVRybWhyTG14V3dkZi9mNVBpUUxzMGpyOFRQeCtLRUNobkhBU2ZEOG9RSUVXNFNmMFkxR0FUTmJoSHgxODd2OGZGQ0NEWmZoSEJ4L25LTUNHcmNEbUJKL1F6NHRmaHJzaGF2ZzVmLzZqQUN1aWhoL25PSUVXM0FvdXQzNHNGT0JDYmZnSnZpK2NRQ2NVd3MvOWY0NEMvS01RZmx6akJFcnI0U1g0OGNsdkFNS3ZUYm9BTlFIMkdIN3UvMnZTQlZpekZSU1A0Y2N5MmZjQWUwNGZ6OEZuK2krVDNBQ2Vnd3hia2dWWXcvVFhJMWNBdGRNSHQwa1ZvT1lqVDY4aXZ6WUxVZ1ZZd2ljKzJtUUtzQ2ZJM3NQUDlOOG1VUUR1ZnF5UktNQ1M2T0ZuK3VjSlg0Q2xNQk1PSElVdXdKN3dNLzIxaEM1QXFRamhSNW13QlNpZC9sSEN6L1F2RTdJQXF1Rkh1WkFGdUtReUZWVmVwNlZ3QmJpYzVncHZlckZmdUFLVWlCUitwdjgrb1FwUU12MGpoUi83aGZ5TE1MV3poK20vWDVnTmNBdzFZVUNKTUFYSXhmVEhxUkFGeUozK2hCK1hRaFFnQitISEV2Y0Z5Sm4raEI5cjNCY0FxT0c2QUV4LzFISmRnSlMwQXFIMFdudHhXNENjeVI1cCtoUCtOdHdXSUNXZDA0Znd0K095QUpIQ3ZZWHd0K1d5QUNscFRIL0MzNTY3QWtRSjl4YkMzNGU3QXFTa01mM1JoN3NDS0V4R2hkYzRDMWNGMkpydUVhWS80ZS9MVlFHaW56NkV2NytRZnhIbURjRWZKMFFCdkU1L2dqK2VxeE1vRXNJL0IvY2J3TnYwSi9oemNWOEFMd2orbkZ3WHdNUDBKL2h6YzF1QTJjTlA4SDNnVFhBRGhOOFBseHRnMXVsUDhQMXhXWURaRUh5LzNCVmc5UFFuN0xHNEswQlBoRDIrdy8zcjQvZm9KMkdoZGpNUWRrMWhDcERyOC9tZHNPT1gzTWVnaEIrbjVBb0FuS0lBa0VZQklJMENRTnJkMTh2SFlmU1RBRWI0ZXZrNHNBRWdqUUpBR2dXQXRMdVVmbTZoMFU4RTZPbVllVFlBcEZFQVNQc3RBR2NRVkp4bW5RMEFhUlFBMHM0S3dCbUU2QzR6emdhQXRLc0NzQVVRMVZLMjJRQ1F0bGdBdGdDaVdjdjA2Z2FnQklqaVZwWTVnU0R0WmdIWUF2QnVLOE9iRzRBU3dLdWM3R2FkUUpRQTN1Um1sdmNBa0paZEFMWUF2Q2pKYXRFR29BU1lYV2xHaTA4Z1NvQlo3Y2xtVlpqVi9tZHB6S2xtS0ZlOUNXWWJZTFRhREZaL0NrUUpNSXBGOWt6RHkwbUVIaXlIcnVuM0FHd0R0R2Fkc1dhQlpSdkFVcXZoMm54aVV3VFVhSDFWZEQxWktBTnk5RHlsaDkzc2xBR25ScjEvbk9aTks0WFFNc3NISm44QnNvSU5nSFh6aTZVQUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFSVGtsRVFWUjRuTzNkMjVVVVJ4YUcwWVFsZjhBS2NFZXlCTnlSckpBc1loNmdtZXJ1dW1SV3h1V2NPSHUvajFTZHNQVDlFVmt3SHphbSsvVHR5NC9abndGZ3BQLysrdWZEN005UW5WK0FRVVFlWUIvallBd1B1UU94QjJqTEtHalBBejFKN0FIbU1Bck84ZkNlSVBvQXNSZ0R4M2xnTzRrK1FBN0d3RDRlMGgyaUQ1Q2JNWENiQi9PRzZBT3N5Umg0emNQNFJmZ0JhakFFZmlyOUVFUWZvTGJLWTZEa0R5NzhBRnlxT0FSSy9jRENEOEE5bFlaQWlSOVUrQUU0b3NJUVdQb0hGSDRBemxoNUNIeWMvUUY2RVg4QXpscTVKY3N0bTVWL3NRQ1laN1hiZ0dWK0dPRUhZSVJWaHNBU3J3REVINEJSVm1sTzZoV3p5aThDQURsbHZnMUlld01nL2dETWxybEZLUWRBNWdjT3dGcXlOaW5WMVVYV2h3eEFEWmxlQ2FTNUFSQi9BS0xMMUtvVUF5RFRBd1dndGl6TkNuMVZrZVVoQXNBMWtWOEpoTDBCRUg4QXNvdmNzcEFESVBJREE0QWpvall0M0FDSStxQUE0RmtSMnhacUFFUjhRQURRUXJUR2hSa0EwUjRNQUxRV3FYVWhCa0NrQndJQVBVVnAzdlFCRU9WQkFNQW9FZG8zZFFCRWVBQUFNTVBzQms0YkFMTi9jQUNZYldZTHB3d0E4UWVBbjJZMWNmZ0FFSDhBZUcxR0c0Y09BUEVIZ090R04zTFlBQkIvQUxodlpDdUhEQUR4QjRCOVJqV3ord0FRZndBNFprUTdwLzlGUUFEQWVGMEhnTk0vQUR5bmQwTzdEUUR4QjRCemVyYTB5d0FRZndCb28xZFRmUWNBQUFwcVBnQ2MvZ0dnclI1dGJUb0F4QjhBK21qZDJHWURRUHdCb0srV3JmVWRBQUFvcU1rQWNQb0hnREZhTmZmMEFCQi9BQmlyUlh1OUFnQ0FnazROQUtkL0FKampiSVBkQUFCQVFVOFBBS2QvQUpqclRJdWZHZ0RpRHdBeFBOdGtyd0FBb0tEREE4RHBId0JpZWFiTmJnQUFvS0JEQThEcEh3QmlPdHBvTndBQVVORHVBZUQwRHdDeEhXbTFHd0FBS0dqWEFIRDZCNEFjOWpiYkRRQUFGR1FBQUVCQkR3ZUE2MzhBeUdWUHU5MEFBRUJCZHdlQTB6OEE1UFNvNFc0QUFLQWdBd0FBQ3JvNUFGei9BMEJ1OTFydUJnQUFDaklBQUtDZ3F3UEE5VDhBck9GVzA5MEFBRUJCQmdBQUZQUnVBTGorQjRDMVhHdTdHd0FBS01nQUFJQ0NYZzBBMS84QXNLYTNqWGNEQUFBRkdRQUFVSkFCQUFBRkdRQUFVTkR2QWVBTGdBQ3d0c3ZXdXdFQWdJSU1BQUFveUFBQWdJSU1BQUFvNk9PMitRSWdBRlR4MG53M0FBQlFrQUVBQUFVWkFBQlFrQUVBQUFVWkFBQlFrQUVBQUFWOThFY0FBYUFlTndBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBQUFGR1FBQVVKQUJBTkRadjMvK1Bmc2p3RHQvelA0QUFLc1JmREl3QUFCT0VIdXlNZ0FBRGhCOFZtRUFBTndoK0t6S0FBRDRwVmZzUDMvLzJ1V2ZDMmNZQUVCWlR2ZFVaZ0FBSllnOXZHWUFBRXNTZkxqUEFBQ1dJUGh3akFFQXBDUDJjSjRCQUlRbitOQ2VBUUNFSmZ6UWp3RUFoQ0w2TUlZQkFJUWcvRENXQVFCTXRYcjQvUzJBUkdVQUFGT3NIbjZJemdBQWhoRjlpTU1BQUxvVGZvakhBQUM2RVg2SXl3QUFtaEo5eU1FQUFKb1Fmc2pGQUFCT0VYN0l5UUFBbmlMOGtKc0JBT3dtK3NmNFM0Q0l6QUFBSGhKK1dJOEJBTndrL0xBdUF3QjRSZlNoQmdNQTJMWk4rS0VhQXdDS0UzNm95UUNBb29RZmFqTUFvQkRSQjE0WUFGQ0E4QU52Zlp6OUFZQyt4Qis0eGcwQUxFcjQ1L0szQUJLZEd3QllrUGdEanhnQXNCanhCL1l3QUdBUi8vNzU5MUx4ZDRVT2Zma09BQ3hBK0lHajNBQkFjcXZFLy9QM3IrL2lid3hBUDI0QUlMSHM4UmQ0bU1jQWdJUXFoZi96OTYvcGYxNkl5QUNBWkRMSDBJa2Y0dkFkQUVna2EveXZ2ZDgvK3I4SDJuSURBQWxrREgvbGFGZisyY25ERFFBRWx5MytaMC83OS82NVFEdHVBQ0N3VFBFWGFNakZBSUNBaFAvMnZ5dlRzNEhJREFBSUprUGduUFloUDk4QmdFQ2l4Ny9YKy8yam53RTR6dzBBQkpBaC9PempXWkdGQVFDVFJZNS90SmhGZmxhUWpRRUFFMFVObXZERCtnd0FtQ0JpMEVRZmFqRUFZTEJvWVJQK2RxSTlTN2pIQUlDQklzVXRXcXdpUFJ1b3dBQ0FRYUlFVHZpQmJUTUFvTHNJZ1JOOTRDMERBRHFhSFRyaEh5ZmFzNFpIREFEb1pHYnNvc1ZvNWZCRFZnWUFOQ2I4L3lmOEVKY0JBQTNOQ0o3b3p4ZnQxd0QyTUFDZ2tkSGhpeGFkaXVHSHpBd0FPR2xrK0tKRmY5dUVIN0l5QU9DRXl2RVhmc2pOQUlBblZZMi84TDhXNmRjR2pqQUE0QW1qSWhnbExxSVA2ekVBNEtCSzhSZCtXSmNCQUFkVWliL3d3L29NQU5pcFF2eUYvNWpaUXczT01BQmdoeEZobkJVVDBZZWFEQUI0WU5YNEN6L1VaZ0RBSFN2R1gvamJjUDFQZGdZQTNMQmEvSVVmdUdRQXdCVzlZemtxL0tJUDNHSUF3QnNyeEYvNGdVY01BTGlRUGY3Q1A0YjMvNnpBQUlCZk1zZGYrSUdqREFEWStnYlVxUitJNk9Qc0R3Q3ppVDlRa1FGQWFlTFBVZDcvc3dxdkFDZ3JhL3lGSDJqQkFLQ2tYaEYxNmdleU1BQW9KZXVwZjl2RUgyakxkd0FvUS93NXkvdC9WdUlHZ0JKYytRTzg1Z2FBNVlrL3dIc0dBRXNUZjFweC9jOXFEQUNXSmY0QXQva09BRXZxRVZIaEIxYmlCb0RsaUQvQVl3WUFTeEYvZXZEK254VVpBQ3hEL0FIMjh4MEFsdEE2cE1JUHJNNE5BT21KUDhCeEJnQ3BpVCs5ZWYvUHFyd0NJSzFNOFJkK0lCb0RnSlJhQnRXcEg2aklLd0RTRVg5R2NmM1B5Z3dBVWhGL2dEYThBaUNOTFBFWGZpQURBNEFVV2tYVnFSL2dKNjhBQ0UvOG1jSDdmMVpuQUZDQytBTzg1aFVBb2JVSXEvZjlBTys1QVNBczhRZm94d0NBSjRqLzJyei9wd0lEZ0pBaW4vN0ZIMWlCN3dBUVR0VDRDMzhOVHY5VTRRYUE1WWcvd0dNR0FLR2NEYTM0YzRiVFA1VVlBSVFSTWJRUlB4TkFDNzREd0RKYW50NkV2eDZuZjZweEEwQUlrYTcreFIrb3dBQmdPdkZuTnFkL0tqSUFTTTEvdUFHZVl3QXcxWmtUZCt2NE8vM1haRVJTbFFIQU5KR0NHK216QUl4Z0FKQ1M5LzYwNFBSUFpRWUFVMFM1K2hkL29Db0RnT0dpeEovYS9GNmlPZ09BTkh6cEQ2QWRBNENob2tRM3l1ZGdEcWQvTUFBWUtNclZ2L2dER0FBa0lQNjA1UFFQUHhrQURQRnNlTVVmb0E4RGdPNGl4QisyemU4cHVHUUFVSUxUUDhCckJnQmRSVGo5aXovYjV2UVBieGtBZENQK0FIRVpBSVFpL3ZUZzlBL3ZHUUIwOFV4OC9VY2FZQndEZ09ZaXhOL3BueGVHSlZ4bkFMQWM4UWQ0ekFDZ3FkbW5mL0hua3RNLzNHWUEwSXo0QStSaEFEQ04weGs5K2YwRjl4a0FOSEgwOU8xTGZ3QnpHUUNjTmp1K3MvLzl4T1AwRDQ4WkFBem52VC9BZkFZQXA4eTgraGQvcm5INmgzME1BSjRtL2dCNUdRQU00VlRHQ0g2ZndYNEdBRStaZVFKMytnYzR6d0RnTUZmL1JPVDBEOGNZQUhRbC9nQXhHUUFjY2lUQzRzOG9Udjl3bkFIQWJyUGlEMEI3QmdETitXdCtHY25ZaE9jWUFPd3lLOExpRDlDSEFVQlQzdnN6a3RNL1BNOEE0S0c5SVJaL2dEd01BSnB3RW1NMHYrZmdIQU9BdS9hY3hIM3BEeUFmQTRCUXhKODluUDdoUEFPQW0wYWYvc1VmWUJ3RGdLZUpQek00L1VNYkJnQlhQUXF5K0FQa1pnQndtQk1Zcy9pOUIrMFlBTHd6OGtUdTlBOHdod0hBSWE3K21jWHBIOW95QUhobFZKVEZueVBFSDlvekFOaXQxWCtFeFo4anhCLzZNQUQ0VFppSlJ2eWhId09BWFp6K0FkWmlBTEJ0Mi8wd2l6OHpPUDFEWHdZQUVJNzRRMzhHQUU3L2hDTCtNSVlCQUlRaC9qQ09BVkNjMHo5UmlEK01aUUFBMDRrL2pHY0FGT2IwRDFDWEFjQTc0czlJVHY4d2h3RlFsRGdUZ2ZqRFBBWUFyemo5TTRyNHcxd0dRRUhpekd6aUQvTVpBUHptOU04STRnOHhHQURGaURNemlUL0VZUUN3Ylp2VFAwQTFCa0FodCtJcy9vemc5QSt4R0FCQWQrSVA4UmdBUlRqOU00djRRMHdHQU5DTitFTmNCa0FCVHYvTUlQNFFtd0VBTkNmK0VKOEJzRGluZjBZVGY4akJBQ2hJL0FFd0FCWW0wSXptOUE5NUdBREZPUDNUaS9oRExnYkFvZ1Nha2NRZjhqRUFDbkg2cHdmeGg1d01nQVVKTktPSVArUmxBQlRoOUU5cjRnKzVHUUFGaUQ4QWJ4a0FpeEZwUm5ENmgvd01nTVU1L2RPYStNTWFEQUJnTi9HSGRSZ0FDM1A2cHlYeGg3VVlBQXU1RExYL1dOT1MzMCt3SGdPQXU1eitFWDlZa3dHd0lGZi9BRHhpQUFBM09mM0R1Z3lBUmJ5YzFwMythVVg4WVcwR0FQQ08rTVA2L3BqOUFXakg2Wit6aEIvcStQRHAyNWNmc3o4RWNZaC9UY0lQOVhnRnNBRFI1bG1mdjM4VmZ5aktBRmlBcTMrZUlmeFFtKzhBUURIQ0QyeWJBY0F2VHYvckUzN2drZ0VBaXhOKzRCb0RBS2YvUlFrL2NJOEJVSno0cjBmNGdUMzhLUUJZaVBnRGU3a0JLTXpwZngzQ0R4eGxBRUJpd2c4OHl3QW95dWsvTitFSHpqSUFJQkhoQjFveEFBcHkrczlIK0lIV0RJQml4RDhYNFFkNjhjY0FJU2p4QjNweUExQ0kwMzhPd2crTVlBQkFFTUlQakdRQUZPSDBINWZ3QXpNWUFEQ0o4QU16R1FBRk9QM0hJdnhBQlA0VXdPTEVQeGJ4QjZKd0F3QURDRDhRalFHd01LZi8rWVFmaU1vQWdBNkVINGpPQUZpVTAvODRZZzlrWkFEQUFXSVByTUlBV0pEVGZ6dUNENnpLQUZpTStEOVA3SUZLREFCS0VudWdPZ05nSVU3LzE0azl3SHNmUG4zNzhtUDJoNkN0eWtOQTdBSDJNUUNLeXp3V3hCN2dlUVlBdTBRWUNvSVAwSTRCUUhNdHhvTFlBL1JsQUREVnYzLytMZllBRS9pL0EyWXE4UWVZd3dBQWdJSU1BQUFveUFBQWdJSU1BQUFveUFBQWdJSU1BQUFveUFBQWdJSU1BQUFvNk9OL2YvM3pZZmFIQUFERytlK3ZmejY0QVFDQWdnd0FBQ2pJQUFDQWdnd0FBQ2pJQUFDQWdnd0FBQ2pvNDdiOS9PTUFzejhJQU5EZlMvUGRBQUJBUVFZQUFCUmtBQUJBUVFZQUFCVDBld0Q0SWlBQXJPMnk5VzRBQUtBZ0F3QUFDaklBQUtBZ0F3QUFDbm8xQUh3UkVBRFc5TGJ4YmdBQW9DQURBQUFLZWpjQXZBWUFnTFZjYTdzYkFBQW95QUFBZ0lLdURnQ3ZBUUJnRGJlYTdnWUFBQW95QUFDZ29Kc0R3R3NBQU1qdFhzdmRBQUJBUVFZQUFCUjBkd0I0RFFBQU9UMXF1QnNBQUNqbzRRQndDd0FBdWV4cHR4c0FBQ2pJQUFDQWduWU5BSzhCQUNDSHZjMTJBd0FBQmUwZUFHNEJBQ0MySTYxMkF3QUFCUjBhQUc0QkFDQ21vNDEyQXdBQUJSMGVBRzRCQUNDV1o5cnNCZ0FBQ25wcUFMZ0ZBSUFZbm0zeTB6Y0FSZ0FBekhXbXhWNEJBRUJCcHdhQVd3QUFtT05zZzkwQUFFQkJwd2VBV3dBQUdLdEZlNXZjQUJnQkFEQkdxK1o2QlFBQUJUVWJBRzRCQUtDdmxxMXRlZ05nQkFCQUg2MGIyL3dWZ0JFQUFHMzFhS3Z2QUFCQVFWMEdnRnNBQUdpalYxTzczUUFZQVFCd1RzK1dkbjBGWUFRQXdITjZOOVIzQUFDZ29PNER3QzBBQUJ3em9wMURiZ0NNQUFEWVoxUXpoNzBDTUFJQTRMNlJyUno2SFFBakFBQ3VHOTNJNFY4Q05BSUE0TFVaYlp6eXB3Q01BQUQ0YVZZVHAvMHhRQ01BZ09wbXRuRHEzd05nQkFCUTFld0dUditMZ0dZL0FBQVlMVUw3cGcrQWJZdnhJQUJnaENqTkN6RUF0aTNPQXdHQVhpSzFMc3dBMkxaWUR3WUFXb3JXdUZBRFlOdmlQU0FBT0N0aTI4SU5nRzJMK2FBQTRCbFJteFp5QUd4YjNBY0dBSHRGYmxuWUQzYnAwN2N2UDJaL0JnRFlLM0w0WDRTOUFiaVU0VUVDd0xibGFWYUtBYkJ0ZVI0b0FIVmxhbFdhRDNySkt3RUFJc2tVL2hkcGJnQXVaWHpRQUt3cGE1TlNEb0J0eS92QUFWaEg1aGFsL2VDWHZCSUFZS1RNNFgrUjlnYmcwZ3EvRUFEa3NFcHpsdmdoTHJrTkFLQ0hWY0wvWXFrZjVwSWhBRUFMcTRYL3hSS3ZBSzVaOVJjTWdIRldic215UDlnbHR3RUFITEZ5K0Y4cy93TmVNZ1FBdUtkQytGK1UrVUV2R1FJQVhLb1UvaGZsZnVCTGhnQkFiUlhELzZMc0QvNldNUUJRUStYb1gvSVEzakFFQU5Zay9LOTVHSGNZQXdDNWlmNXRIc3hPeGdCQURxSy9qNGYwQkdNQUlCYlJQODRETzhrWUFKaEQ5TS94OERvd0NnRGFFdnYyUE5CQmpBS0FmY1IrREE4NUFPTUFxRWJrNS9zZjY0dUsrSUZQVVVnQUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFGaDBsRVFWUjRuTzNjMjFFalFReUY0VGExK1VBVWtBNUVBdWxBRkJBUis4Q2E5V1hHMHoydHZram4vNTYzakYxMWppVGJzSWMwaWZ2WHgrL1J6d0g5ZkwxOEhFWS9oNVJTR3ZZa0NEeE9qU3BFMXg5SzZKR2paeG1hL3lCQ2p4cXR5OURzd1FrK0xMVXFndm1ERW55MFpGMkVPOHNISS94b3pUcGpKbTBpK0JqQllodFVid0RDajFFc3NsZFZBTUtQMFdvenVHdUZFSHpNYU05SlZMd0JDRDltdFNlYlJRVWcvSmhkYVVhekMwRDQ0VVZKVmsyL0J3Qzh5U29BMHgvZTVHWjJzd0NFSDE3bFpQZG1BUWcvdk52S01POEJJRzIxQUV4L1JIRXJ5NHNGSVB5SVppM1RuRUNRZGxVQXBqK2lXc28yR3dEU3pnckE5RWQwbHhsbkEwQWFCWUMwM3dKdy9rREZhZGJaQUpCR0FTRHRMaVhPSCtnNVpwNE5BR2tVQU5Jb0FLUWR1UCtoakEwQWFSUUEwaWdBcEZFQVNLTUFrRVlCSUkwQ1FCb0ZnRFFLQUdrVUFOSW9BS1JSQUVpakFKQkdBU0NOQWtBYUJZQTBDZ0JwRkFEU0tBQ2tVUUJJb3dDUVJnRWdqUUpBR2dXQU5Bb0FhUlFBMGlnQXBGRUFwSlJTK254K0gvMFVodmd6K2dsZ0ROWEFYNklBQWdqN09nb1FFSUhQUndHY0kreDFLSUJUMXNGL2VIc3lmVHd2S0lBelRIeGJGTUFCUXQ4T0JaZ1l3VytQQWt5STRQZERBU1pDOFB1akFJTVIrckVvd0NBRWZ3NzhNdHdBaEg4ZUZLQ2p6K2QzMC9CYmZYbWwraVZZU3B4QTNjd1lmTEFCdXJBSy84UGIwMVg0S1VNZE5rQkRGc0VuNEcyeEFScXBEZi9TdEwvMWI3RVBHNkNCbXZBVDVyNG9nS0VSd2JmWU5Nb29nSkc5UVJ3VmZQeWdBQVpLdzBqbzUwRUJLaEI4L3lqQVRybWhyTG14V3dkZi9mNVBpUUxzMGpyOFRQeCtLRUNobkhBU2ZEOG9RSUVXNFNmMFkxR0FUTmJoSHgxODd2OGZGQ0NEWmZoSEJ4L25LTUNHcmNEbUJKL1F6NHRmaHJzaGF2ZzVmLzZqQUN1aWhoL25PSUVXM0FvdXQzNHNGT0JDYmZnSnZpK2NRQ2NVd3MvOWY0NEMvS01RZmx6akJFcnI0U1g0OGNsdkFNS3ZUYm9BTlFIMkdIN3UvMnZTQlZpekZSU1A0Y2N5MmZjQWUwNGZ6OEZuK2krVDNBQ2Vnd3hia2dWWXcvVFhJMWNBdGRNSHQwa1ZvT1lqVDY4aXZ6WUxVZ1ZZd2ljKzJtUUtzQ2ZJM3NQUDlOOG1VUUR1ZnF5UktNQ1M2T0ZuK3VjSlg0Q2xNQk1PSElVdXdKN3dNLzIxaEM1QXFRamhSNW13QlNpZC9sSEN6L1F2RTdJQXF1Rkh1WkFGdUtReUZWVmVwNlZ3QmJpYzVncHZlckZmdUFLVWlCUitwdjgrb1FwUU12MGpoUi83aGZ5TE1MV3poK20vWDVnTmNBdzFZVUNKTUFYSXhmVEhxUkFGeUozK2hCK1hRaFFnQitISEV2Y0Z5Sm4raEI5cjNCY0FxT0c2QUV4LzFISmRnSlMwQXFIMFdudHhXNENjeVI1cCtoUCtOdHdXSUNXZDA0Znd0K095QUpIQ3ZZWHd0K1d5QUNscFRIL0MzNTY3QWtRSjl4YkMzNGU3QXFTa01mM1JoN3NDS0V4R2hkYzRDMWNGMkpydUVhWS80ZS9MVlFHaW56NkV2NytRZnhIbURjRWZKMFFCdkU1L2dqK2VxeE1vRXNJL0IvY2J3TnYwSi9oemNWOEFMd2orbkZ3WHdNUDBKL2h6YzF1QTJjTlA4SDNnVFhBRGhOOFBseHRnMXVsUDhQMXhXWURaRUh5LzNCVmc5UFFuN0xHNEswQlBoRDIrdy8zcjQvZm9KMkdoZGpNUWRrMWhDcERyOC9tZHNPT1gzTWVnaEIrbjVBb0FuS0lBa0VZQklJMENRTnJkMTh2SFlmU1RBRWI0ZXZrNHNBRWdqUUpBR2dXQXRMdVVmbTZoMFU4RTZPbVllVFlBcEZFQVNQc3RBR2NRVkp4bW5RMEFhUlFBMHM0S3dCbUU2QzR6emdhQXRLc0NzQVVRMVZLMjJRQ1F0bGdBdGdDaVdjdjA2Z2FnQklqaVZwWTVnU0R0WmdIWUF2QnVLOE9iRzRBU3dLdWM3R2FkUUpRQTN1Um1sdmNBa0paZEFMWUF2Q2pKYXRFR29BU1lYV2xHaTA4Z1NvQlo3Y2xtVlpqVi9tZHB6S2xtS0ZlOUNXWWJZTFRhREZaL0NrUUpNSXBGOWt6RHkwbUVIaXlIcnVuM0FHd0R0R2Fkc1dhQlpSdkFVcXZoMm54aVV3VFVhSDFWZEQxWktBTnk5RHlsaDkzc2xBR25ScjEvbk9aTks0WFFNc3NISm44QnNvSU5nSFh6aTZVQUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogIm1hc2thYmxlIn1dfQ==">
+  <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFh0lEQVR4nO3c21EjQQyF4Ta1+UAUkA5EAulAFBAR+8Ca9WXG0z2tvkjn/563jF11jiTbsIc0ifvXx+/RzwH9fL18HEY/h5RSGvYkCDxOjSpE1x9K6JGjZxma/yBCjxqty9DswQk+LLUqgvmDEny0ZF2EO8sHI/xozTpjJm0i+BjBYhtUbwDCj1EssldVAMKP0WozuGuFEHzMaM9JVLwBCD9mtSebRQUg/JhdaUazC0D44UVJVk2/BwC8ySoA0x/e5GZ2swCEH17lZPdmAQg/vNvKMO8BIG21AEx/RHEry4sFIPyIZi3TnECQdlUApj+iWso2GwDSzgrA9Ed0lxlnA0AaBYC03wJw/kDFadbZAJBGASDtLiXOH+g5Zp4NAGkUANIoAKQduP+hjA0AaRQA0igApFEASKMAkEYBII0CQBoFgDQKAGkUANIoAKRRAEijAJBGASCNAkAaBYA0CgBpFADSKACkUQBIowCQRgEgjQJAGgWANAoAaRQA0igApFEApJRS+nx+H/0Uhvgz+glgDNXAX6IAAgj7OgoQEIHPRwGcI+x1KIBT1sF/eHsyfTwvKIAzTHxbFMABQt8OBZgYwW+PAkyI4PdDASZC8PujAIMR+rEowCAEfw78MtwAhH8eFKCjz+d30/BbfXml+iVYSpxA3cwYfLABurAK/8Pb01X4KUMdNkBDFsEn4G2xARqpDf/StL/1b7EPG6CBmvAT5r4ogKERwbfYNMoogJG9QRwVfPygAAZKw0jo50EBKhB8/yjATrmhrLmxWwdf/f5PiQLs0jr8TPx+KEChnHASfD8oQIEW4Sf0Y1GATNbhHx187v8fFCCDZfhHBx/nKMCGrcDmBJ/Qz4tfhrshavg5f/6jACuihh/nOIEW3Aout34sFOBCbfgJvi+cQCcUws/9f44C/KMQflzjBErr4SX48clvAMKvTboANQH2GH7u/2vSBVizFRSP4ccy2fcAe04fz8Fn+i+T3ACegwxbkgVYw/TXI1cAtdMHt0kVoOYjT68ivzYLUgVYwic+2mQKsCfI3sPP9N8mUQDufqyRKMCS6OFn+ucJX4ClMBMOHIUuwJ7wM/21hC5AqQjhR5mwBSid/lHCz/QvE7IAquFHuZAFuKQyFVVep6VwBbic5gpverFfuAKUiBR+pv8+oQpQMv0jhR/7hfyLMLWzh+m/X5gNcAw1YUCJMAXIxfTHqRAFyJ3+hB+XQhQgB+HHEvcFyJn+hB9r3BcAqOG6AEx/1HJdgJS0AqH0WntxW4CcyR5p+hP+NtwWICWd04fwt+OyAJHCvYXwt+WyAClpTH/C3567AkQJ9xbC34e7AqSkMf3Rh7sCKExGhdc4C1cF2JruEaY/4e/LVQGinz6Ev7+QfxHmDcEfJ0QBvE5/gj+eqxMoEsI/B/cbwNv0J/hzcV8ALwj+nFwXwMP0J/hzc1uA2cNP8H3gTXADhN8Plxtg1ulP8P1xWYDZEHy/3BVg9PQn7LG4K0BPhD2+w/3r4/foJ2GhdjMQdk1hCpDr8/mdsOOX3MeghB+n5AoAnKIAkEYBII0CQNrd18vHYfSTAEb4evk4sAEgjQJAGgWAtLuUfm6h0U8E6OmYeTYApFEASPstAGcQVJxmnQ0AaRQA0s4KwBmE6C4zzgaAtKsCsAUQ1VK22QCQtlgAtgCiWcv06gagBIjiVpY5gSDtZgHYAvBuK8ObG4ASwKuc7GadQJQA3uRmlvcAkJZdALYAvCjJatEGoASYXWlGi08gSoBZ7clmVZjV/mdpzKlmKFe9CWYbYLTaDFZ/CkQJMIpF9kzDy0mEHiyHrun3AGwDtGadsWaBZRvAUqvh2nxiUwTUaH1VdD1ZKANy9Dylh93slAGnRr1/nOZNK4XQMssHJn8BsoINgHXzi6UAAAAASUVORK5CYII=">
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFHElEQVR4nO3d21FbQRBF0RHlfCAKlA5EAulAFBAR/sAXC+k+5j3Tp/cKQBLlzXFLUPYpDHT/8vg18vnRxufz+2nUc3d9YgL2qWfgzZ+IiHGpddzNHpyQsadV2NUflJCRonbY1R6MkFGiVth3NR6EmFGqVkNF3xWEjBZK1jp7oYkZrZS0lRU0MaO13MaSgyZm9JLTWlLQxIzeUpuLDpqYMUpKe1FBEzNGi23wMGhixixiWtwNmpgxm6Mmq/ykEJjFZtCsM2a11+Zq0MSM2W01yskBKTdBs86wYq1VFhpSfgXNOsOa62ZZaEj5CZp1hlWX7bLQkELQkHIXAucG7FsaZqEhhaAhhaAh5cT9DCUsNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQNKQQtAMfT2+jX0I3f0a/ANTlKd41BG2U93C3ELQBxBuPoCdGyOkIekKEnI+gJ0LI5Qh6AoRcD0EPQsRtEHRnI0J+eD13f85RCLoTFrkPgm6MkPvidzkaIub+CLqBj6e3ajF7un9r4OSojJDHIuiKSmPeivjh9cz5EomgK2gVMtJxQxcqifnh9RwdM9HHYaEz5YacEybnRjyCzpATWGrIvLnMQ9CJUkMbFbJXBB0pJTTOinEIOkJsbLOtsbdzIwSCPtQiZta4HYLeERMeIc+FoDfUipmI+yLoFTViHh2yx/s5BIK+cRQiqzw3gr5QGjMhj8fvcvyjFLPXcyMEgg4haMXsnfuTYy9GQrbH9UIrxuz53AjBcdCKMcPpybEVJB/J2ecu6NyYCdkGVyfHXsx7wVqJ2fv9HIKzoNcsEWzFYCVmfHNzcqyFubdohGyTi4VOjdNizJwb3+SDTn0TaDFm/Ccf9Bq1NVP7ekpIB83d7I9s0F5iZp1/kw06hdWYcUsy6JR1thwz63xLLujUUwNa5IK+png3h8A36RapoFMCtRwztskE7eVuDoF13iMRNHczFhJBX1O9m0PgG/WI+aCvA1WOGcfMBx1LIWbW+ZjpoGPXWSFmxDEd9CX19VL/+moxG/Tl6nI3Y2E26BgqMbPO8UwGHbPOxOyTyaC9IOZ05oL2ss7EnMdc0B4Qcz5TQXtYZ2IuYyroheofuurX1ZOZoGOW1/o6o5yZoBecGthjImjrsR4h5npMBL1QXGdirstU0GqIub7pg17WV22dibmN6YMOgZgRz0TQSoi5rdP9y+PX6BeRw9o6E3IfUy+0tWjXPLyeibmjqYO2fjsTcn9u/tOgngh5HHNBz7zOhDyeqaBnjZmQ5zH1DW0BMc/FzELPts6EPCczQc+CkOdmIuhR60y89pgIugfi1WD2R98hlC03AWsyHXSMj6c34nVE/mM7YvZFPmj4QtCQQtCQQtCQQtCQcvf5/H4a/SKAGj6f308sNKQQNKQQNKTchfB9e4x+IUCJpWEWGlIIGlJ+gubsgFWX7bLQkPIraFYa1lw3y0JDyk3QrDSsWGuVhYaU1aBZacxuq9HNhSZqzGqvTU4OSNkNmpXGbI6aPFxoosYsYlqMOjmIGqPFNhh9QxM1RklpL+lNIVGjt9Tmkj/lIGr0ktNa1sd2RI3WchvL/hyaqNFKSVtVolT/J3nRR42RrPKTQtYapWo1VD1E1hopao9hs2UlbOxp9bd681OBsHGp9Xna9fYlbp96vsca+maOwDWN/JDgL3cq+1OvJyjdAAAAAElFTkSuQmCC">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Kisan Suraksha">
+  <style>
+    /* Layout: one narrow column. Illustrated hero card, photo/colour input, then a result card with severity band, precautions and an emergency box. */
+    :root {
+      --bg: #eef2ea;
+      --ink: #16211a;
+      --mut: #53625a;
+      --card: #fff;
+      --line: #d3dccf;
+      --tile: #f1f5ee;
+      --do: #1e7a3c;
+      --no: #c62828;
+      --sky: #cfe7f1;
+      --hill1: #a8cf9e;
+      --hill2: #7db478;
+      --soil: #a9794d;
+      --soil2: #8c6036;
+      --crop: #2f8f46;
+      --sun: #f6c445;
+      --cloud: #ffffff;
+      --shadow-sm: 0 1px 2px rgba(22, 33, 26, .07), 0 1px 1px rgba(22, 33, 26, .04);
+      --shadow-md: 0 10px 26px rgba(22, 33, 26, .10), 0 2px 6px rgba(22, 33, 26, .06);
+      --bar-h: 58px;
+      box-sizing: border-box
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #111a14;
+        --ink: #eef2ec;
+        --mut: #9fb0a5;
+        --card: #1a261e;
+        --line: #2e3e33;
+        --tile: #233229;
+        --do: #62d08a;
+        --no: #ff7a73;
+        --sky: #1d3a4a;
+        --hill1: #2b5a3b;
+        --hill2: #234832;
+        --soil: #5b4129;
+        --soil2: #47321f;
+        --crop: #4fb066;
+        --sun: #e9c46a;
+        --cloud: #8fb3c4;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+        --shadow-md: 0 12px 28px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .3);
+        color-scheme: dark
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #111a14;
+      --ink: #eef2ec;
+      --mut: #9fb0a5;
+      --card: #1a261e;
+      --line: #2e3e33;
+      --tile: #233229;
+      --do: #62d08a;
+      --no: #ff7a73;
+      --sky: #1d3a4a;
+      --hill1: #2b5a3b;
+      --hill2: #234832;
+      --soil: #5b4129;
+      --soil2: #47321f;
+      --crop: #4fb066;
+      --sun: #e9c46a;
+      --cloud: #8fb3c4;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+      --shadow-md: 0 12px 28px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .3);
+      color-scheme: dark
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 17px/1.55 "Noto Sans Devanagari", "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      height: env(safe-area-inset-top, 0px);
+      background: var(--card);
+      z-index: 10
+    }
+
+    .appbar {
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: var(--bar-h);
+      padding: 8px 16px;
+      background: var(--card);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .appbar .wrap {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex: none
+    }
+
+    .brand .mark {
+      width: 30px;
+      height: 30px;
+      flex: none;
+      border-radius: 9px;
+      background: var(--crop);
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .brand .mark svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .brand strong {
+      font-size: 1.02rem;
+      line-height: 1.1;
+      white-space: nowrap
+    }
+
+    .seg {
+      margin-left: auto;
+      display: flex;
+      gap: 2px;
+      background: var(--tile);
+      border-radius: 999px;
+      padding: 3px;
+      flex: none
+    }
+
+    .seg button {
+      min-height: 32px;
+      border: none;
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: .82rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--mut);
+      box-shadow: none
+    }
+
+    .seg button[aria-pressed="true"] {
+      background: var(--card);
+      color: var(--ink);
+      box-shadow: var(--shadow-sm)
+    }
+
+    main {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      line-height: 1.25;
+      margin: 0;
+      font-weight: 700;
+      text-wrap: balance
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      line-height: 1.3;
+      margin: 0;
+      font-weight: 700
+    }
+
+    p {
+      margin: 0
+    }
+
+    .mut {
+      color: var(--mut);
+      font-size: .92rem
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    button,
+    .btn {
+      font: inherit;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-height: 50px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .12s ease, box-shadow .12s ease
+    }
+
+    button:active,
+    .btn:active {
+      transform: scale(.97)
+    }
+
+    button:focus-visible,
+    .btn:focus-visible {
+      outline: 3px solid #1565c0;
+      outline-offset: 2px
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: default;
+      transform: none
+    }
+
+    .primary {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+      flex: 1;
+      text-align: center;
+      box-shadow: var(--shadow-md)
+    }
+
+    .alt {
+      flex: 1;
+      text-align: center
+    }
+
+    .btn svg,
+    .row button svg {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .actions {
+      gap: 10px
+    }
+
+    .actions .btn {
+      flex-direction: column;
+      gap: 7px;
+      min-height: 84px;
+      padding: 14px 10px;
+      border-radius: 18px
+    }
+
+    .actions .btn svg {
+      width: 26px;
+      height: 26px
+    }
+
+    .actions .btn span {
+      font-size: .88rem
+    }
+
+    .hero {
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: var(--shadow-md)
+    }
+
+    .hero svg {
+      display: block;
+      width: 100%;
+      height: auto
+    }
+
+    .hero .txt {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      touch-action: manipulation;
+      cursor: crosshair;
+      display: none
+    }
+
+    .picker {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .sw {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px
+    }
+
+    .sw button {
+      height: 60px;
+      width: 60px;
+      padding: 0;
+      margin: 0 auto;
+      border: none;
+      border-radius: 999px;
+      box-shadow: var(--shadow-md)
+    }
+
+    .sw button svg {
+      width: 30px;
+      height: 30px
+    }
+
+    #res {
+      display: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--card)
+    }
+
+    #band {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .brow {
+      display: flex;
+      gap: 14px;
+      align-items: center
+    }
+
+    .bi {
+      flex: none;
+      width: 64px;
+      height: 64px
+    }
+
+    .bi svg {
+      width: 100%;
+      height: 100%
+    }
+
+    #band h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      font-weight: 700
+    }
+
+    #rs {
+      margin-top: 2px
+    }
+
+    .gauge {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px
+    }
+
+    .gauge span {
+      height: 10px;
+      border-radius: 5px;
+      background: currentColor;
+      opacity: .28
+    }
+
+    .gauge span.on {
+      opacity: 1
+    }
+
+    .bi svg,
+    .sw button svg {
+      fill: currentColor;
+      stroke: currentColor;
+      stroke-width: 3;
+      stroke-linejoin: round;
+      stroke-linecap: round
+    }
+
+    .bi .h,
+    .sw .h {
+      fill: var(--bandc);
+      stroke: none
+    }
+
+    .bi .l,
+    .sw .l {
+      fill: none
+    }
+
+    #body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .items li {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .ic {
+      flex: none;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--tile);
+      box-shadow: inset 0 0 0 1.5px var(--line);
+      padding: 6px
+    }
+
+    .items li.do .ic {
+      box-shadow: inset 0 0 0 1.5px var(--do)
+    }
+
+    .items li.no .ic {
+      box-shadow: inset 0 0 0 1.5px var(--no)
+    }
+
+    .ic svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: var(--ink);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .ic svg .x {
+      stroke: var(--no);
+      stroke-width: 3.2
+    }
+
+    .ic svg .f {
+      fill: var(--ink);
+      fill-opacity: .14
+    }
+
+    .ic svg .n {
+      fill: var(--ink);
+      stroke: none;
+      font: 700 15px "Noto Sans", system-ui, sans-serif
+    }
+
+    .em {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm), inset 0 0 0 1.5px var(--no)
+    }
+
+    .emh {
+      background: #b3261e;
+      color: #fff;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .emh svg {
+      width: 30px;
+      height: 30px;
+      flex: none;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .em .items {
+      padding: 12px 14px 14px
+    }
+
+    #err {
+      color: var(--no);
+      font-weight: 600;
+      display: none
+    }
+
+    .player {
+      background: var(--tile);
+      border-radius: 999px;
+      padding: 6px;
+      gap: 6px;
+      flex-wrap: nowrap
+    }
+
+    .player button {
+      border: none;
+      box-shadow: none;
+      border-radius: 999px;
+      background: transparent;
+      min-height: 42px
+    }
+
+    .player .primary {
+      box-shadow: var(--shadow-sm)
+    }
+
+    .player button:disabled {
+      box-shadow: none
+    }
+
+    .off {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .off::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--do);
+      flex: none
+    }
+  </style>
+  <header class="appbar">
+    <div class="wrap">
+      <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 19c7 1 12-3 13-11-7 .5-11 4-13 11z" />
+            <path d="M5 19c2-5 5-8 9-9" />
+          </svg></span><strong>Kisan Suraksha</strong></div>
+      <div class="seg" role="group" aria-label="Language">
+        <button id="lhi" aria-pressed="true">हिन्दी</button><button id="lmr" aria-pressed="false">मराठी</button><button
+          id="len" aria-pressed="false">English</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="hero">
+      <div id="scene" aria-hidden="true"></div>
+      <div class="txt">
+        <h1 id="t"></h1>
+        <p id="sub" class="mut"></p>
+        <p id="off" class="mut off"></p>
+      </div>
+    </div>
+    <div class="row actions"><label class="btn primary" for="f" id="pick" tabindex="0"></label><input id="f" type="file"
+        accept="image/*" capture="environment" hidden><label class="btn alt" for="g" id="upl"
+        tabindex="0"></label><input id="g" type="file" accept="image/*" hidden></div>
+    <p id="hint" class="mut" style="display:none"></p>
+    <canvas id="cv" aria-label="Pesticide pack photo"></canvas>
+    <p id="err" role="alert"></p>
+    <div class="picker">
+      <p class="mut" id="or"></p>
+      <div class="sw" id="sw"></div>
+    </div>
+    <section id="res" aria-live="polite">
+      <div id="band">
+        <div class="brow"><span class="bi" id="bi" aria-hidden="true"></span>
+          <div>
+            <h2 id="rt"></h2>
+            <p id="rs"></p>
+          </div>
+        </div>
+        <div class="gauge" id="gg" role="img"></div>
+      </div>
+      <div id="body">
+        <div class="row player"><button class="primary" id="spk"></button><button id="stp" disabled></button></div>
+        <p class="mut" id="vnote" role="status" hidden></p>
+        <h3 id="rh"></h3>
+        <ul class="items" id="rules"></ul>
+        <div class="em">
+          <div class="emh"><span id="emi" aria-hidden="true"></span>
+            <h3 id="eh"></h3>
+          </div>
+          <ul class="items" id="emg"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const C = {
+      red: {
+        c: '#d32f2f',
+        f: '#fff',
+        hi: ['अत्यंत विषैला (लाल)', 'थोड़ी मात्रा भी जानलेवा हो सकती है। इसे ज़हर समझें।'],
+        mr: ['अत्यंत विषारी (लाल)', 'थोड्या प्रमाणातही जीवघेणे ठरू शकते. याला विष समजा.'],
+        en: ['Extremely toxic (red)', 'Can kill in a small amount. Treat it as poison.']
+      },
+      yellow: {
+        c: '#f9c20a',
+        f: '#16211a',
+        hi: ['अधिक विषैला (पीला)', 'बहुत ख़तरनाक। पूरी सुरक्षा के साथ ही इस्तेमाल करें।'],
+        mr: ['अधिक विषारी (पिवळा)', 'खूप धोकादायक. पूर्ण संरक्षण घेऊनच वापरा.'],
+        en: ['Highly toxic (yellow)', 'Very dangerous. Use only with full protection.']
+      },
+      blue: {
+        c: '#1565c0',
+        f: '#fff',
+        hi: ['मध्यम विषैला (नीला)', 'हानिकारक। सुरक्षा पहनें और मात्रा का पालन करें।'],
+        mr: ['मध्यम विषारी (निळा)', 'हानिकारक. संरक्षक साधने वापरा आणि मात्रा पाळा.'],
+        en: ['Moderately toxic (blue)', 'Harmful. Wear protection and follow the dose.']
+      },
+      green: {
+        c: '#2e7d32',
+        f: '#fff',
+        hi: ['कम विषैला (हरा)', 'फिर भी निगलने या सांस में जाने पर हानिकारक।'],
+        mr: ['कमी विषारी (हिरवा)', 'तरीही गिळल्यास किंवा श्वासावाटे गेल्यास हानिकारक.'],
+        en: ['Slightly toxic (green)', 'Still harmful if swallowed or breathed in.']
+      }
+    };
+    const L = {
+      hi: {
+        t: 'कीटनाशक पैकेट की जाँच',
+        sub: 'पैकेट पर बने रंगीन चौकोर निशान की फ़ोटो लें। ऐप बताएगा कि यह कितना ज़हरीला है और क्या सावधानी रखें।',
+        pick: 'पैकेट की फ़ोटो लें',
+        hint: 'फ़ोटो में पैकेट के रंगीन निशान पर उँगली रखें।',
+        or: 'या सीधे रंग चुनें:',
+        spk: 'सुनें',
+        rh: 'सावधानियाँ',
+        eh: 'ज़हर लगने पर तुरंत करें',
+        rules: ['दस्ताने, मास्क और पूरी बाँह के कपड़े पहनें। हवा की दिशा में पीठ रखकर छिड़काव करें।',
+          'छिड़काव करते समय खाना, पीना या बीड़ी-सिगरेट न पिएँ।',
+          'पैकेट बच्चों और खाने-पीने की चीज़ों से दूर रखें। खाली डिब्बे दोबारा इस्तेमाल न करें।',
+          'काम के बाद हाथ और शरीर साबुन से धोएँ।'
+        ],
+        emg: 'अगर ज़हर निगला हो, या किसी को बहुत पसीना, लार टपकना, उल्टी, झटके या साँस में तकलीफ़ हो: तुरंत अस्पताल ले जाएँ और यह पैकेट साथ रखें। 112 पर कॉल करें। दूषित कपड़े उतारें और त्वचा साबुन-पानी से धोएँ। उल्टी कराने की कोशिश न करें।',
+        err: 'रंग साफ़ नहीं दिखा। दिन की रोशनी में दोबारा फ़ोटो लें, या नीचे से रंग चुनें।',
+        vnote: '',
+        off: 'इंटरनेट न होने पर भी काम करता है',
+        lang: 'hi-IN'
+      },
+      mr: {
+        t: 'कीटकनाशक पाकिटाची तपासणी',
+        sub: 'पाकिटावरील रंगीत चौकोनी खुणेचा फोटो काढा. ते किती विषारी आहे आणि कोणती काळजी घ्यावी हे ॲप सांगेल.',
+        pick: 'पाकिटाचा फोटो काढा',
+        hint: 'फोटोमधील पाकिटाच्या रंगीत खुणेवर बोट ठेवा.',
+        or: 'किंवा थेट रंग निवडा:',
+        spk: 'ऐका',
+        rh: 'काळजी',
+        eh: 'विषबाधा झाल्यास ताबडतोब हे करा',
+        rules: ['हातमोजे, मास्क आणि पूर्ण बाह्यांचे कपडे घाला. वाऱ्याकडे पाठ करून फवारणी करा.',
+          'फवारणी करताना खाऊ, पिऊ किंवा विडी-सिगारेट ओढू नका.',
+          'पाकीट मुले आणि खाण्यापिण्याच्या वस्तूंपासून दूर ठेवा. रिकामे डबे पुन्हा वापरू नका.',
+          'काम झाल्यावर हात आणि शरीर साबणाने धुवा.'
+        ],
+        emg: 'विष गिळले असल्यास, किंवा कोणाला खूप घाम येत असेल, तोंडातून लाळ गळत असेल, उलट्या होत असतील, झटके येत असतील किंवा श्वास घ्यायला त्रास होत असेल: त्यांना ताबडतोब रुग्णालयात न्या आणि हे पाकीट सोबत ठेवा. 112 वर कॉल करा. दूषित कपडे काढा आणि त्वचा साबण-पाण्याने धुवा. उलटी करवण्याचा प्रयत्न करू नका.',
+        err: 'रंग स्पष्ट दिसला नाही. दिवसाच्या उजेडात पुन्हा फोटो काढा, किंवा खालून रंग निवडा.',
+        vnote: 'या फोनवर मराठी आवाज उपलब्ध नाही. वाचन हिंदी आवाजात होत आहे.',
+        off: 'इंटरनेट नसतानाही चालते',
+        lang: 'mr-IN'
+      },
+      en: {
+        t: 'Pesticide pack check',
+        sub: 'Photograph the coloured square on the pack. The app tells you how toxic it is and what precautions to take.',
+        pick: 'Take a photo of the pack',
+        hint: 'Tap the coloured mark on the pack in the photo.',
+        or: 'Or choose the colour directly:',
+        spk: 'Listen',
+        rh: 'Precautions',
+        eh: 'If someone is poisoned, act now',
+        rules: ['Wear gloves, a mask and full-sleeve clothes. Spray with the wind at your back.',
+          'Do not eat, drink or smoke while spraying.',
+          'Keep the pack away from children and food. Never reuse empty containers.',
+          'Wash your hands and body with soap after work.'
+        ],
+        emg: 'If it was swallowed, or someone sweats heavily, drools, vomits, twitches or has trouble breathing: take them to a hospital at once and carry this pack. Call 112. Remove contaminated clothes and wash the skin with soap and water. Do not make them vomit.',
+        err: 'The colour was not clear. Retake the photo in daylight, or choose the colour below.',
+        vnote: '',
+        off: 'Works without internet too',
+        lang: 'en-IN'
+      }
+    };
+    const LB = {
+      hi: 'lhi',
+      mr: 'lmr',
+      en: 'len'
+    };
+    const UP = {
+      hi: 'फ़ोटो अपलोड करें',
+      mr: 'फोटो अपलोड करा',
+      en: 'Upload a photo'
+    };
+    const CT = {
+      hi: {
+        pz: 'विराम',
+        rsm: 'जारी रखें',
+        stp: 'बंद करें'
+      },
+      mr: {
+        pz: 'विराम',
+        rsm: 'पुढे चालू ठेवा',
+        stp: 'बंद करा'
+      },
+      en: {
+        pz: 'Pause',
+        rsm: 'Resume',
+        stp: 'Stop'
+      }
+    };
+    /* ---------- icons (all drawn here, 48x48) ---------- */
+    const S = (b, c) => '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"' + (c ? ' class="' + c + '"' :
+      '') + '>' + b + '</svg>';
+    const SL = '<circle class="x" cx="24" cy="24" r="19"/><path class="x" d="M11 37L37 11"/>';
+    const IC = {
+      ppe: S(
+        '<path class="f" d="M12 13h24c1.500 0 2.500 1 2.500 2.500v12c0 5-3.500 8.500-8 8.500H17.500c-4.500 0-8-3.500-8-8.500v-12C9.500 14 10.500 13 12 13z"/><path d="M11 20h26M11 26.500h26"/><path d="M9.500 17C3.500 17 3.500 30 9.500 30M38.500 17c6 0 6 13 0 13"/>'
+        ),
+      smoke: S(
+        '<path class="f" d="M6 31h26v6H6z"/><path d="M32 31h8v6h-8"/><path d="M13 25c0-3.500 3-3.500 3-7s-3-3.500-3-7M21 25c0-3.500 3-3.500 3-7"/>' +
+        SL),
+      child: S('<circle cx="24" cy="12.500" r="5.500"/><path class="f" d="M14 41v-9a10 10 0 0 1 20 0v9z"/>' + SL),
+      wash: S(
+        '<rect class="f" x="6" y="27" width="24" height="13" rx="6"/><circle cx="35" cy="17" r="4.500"/><circle cx="26" cy="12" r="3"/><circle cx="40" cy="29" r="3"/><path d="M13 8c-3 3.500-4.500 5.500-4.500 7.500a4.500 4.500 0 0 0 9 0c0-2-1.500-4-4.500-7.500z"/>'
+        ),
+      hosp: S(
+        '<rect class="f" x="7" y="15" width="34" height="26" rx="3"/><path d="M17 15V9h14v6"/><path d="M24 21v14M17 28h14"/>'
+        ),
+      sos: S(
+        '<circle class="f" cx="24" cy="24" r="19"/><text class="n" x="24" y="29.500" text-anchor="middle">112</text>'
+        ),
+      shirt: S('<path class="f" d="M17 8l-11 7 5 7 5-3v22h16V19l5 3 5-7-11-7c-1 3.500-3.500 5-7 5s-6-1.500-7-5z"/>'),
+      nov: S(
+        '<path class="f" d="M12 13h24l-3 28H15z"/><path d="M14.500 24c3.200-2.500 6.500 2.500 9.500 0s6.500 2.500 9.500 0"/>' +
+        SL),
+      cross: '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="20"/><path d="M24 14v20M14 24h20"/></svg>'
+    };
+    const RI = ['ppe', 'smoke', 'child', 'wash'],
+      RT = ['do', 'no', 'no', 'do'],
+      EI = ['hosp', 'sos', 'shirt', 'nov'],
+      ET = ['do', 'do', 'do', 'no'];
+    const H =
+      '<circle class="h" cx="24" cy="35" r="2.800"/><rect class="h" x="21.800" y="15" width="4.400" height="14" rx="2.200"/>';
+    const BI = {
+      red: '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 3C14 3 8 9.500 8 17c0 5 2.700 8.500 7 11v4h18v-4c4.300-2.500 7-6 7-11C40 9.500 34 3 24 3z"/><circle class="h" cx="17.500" cy="17.500" r="4"/><circle class="h" cx="30.500" cy="17.500" r="4"/><path class="h" d="M24 22l-2.600 5.500h5.200z"/><path class="l" d="M9 38l30 7M39 38L9 45" stroke-width="4.500"/></svg>',
+      yellow: '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 5L45 41H3z"/><rect class="h" x="21.800" y="17" width="4.400" height="12" rx="2.200"/><circle class="h" cx="24" cy="35" r="2.600"/></svg>',
+      blue: '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 3L45 24 24 45 3 24z"/><rect class="h" x="21.800" y="14" width="4.400" height="14" rx="2.200"/><circle class="h" cx="24" cy="34" r="2.700"/></svg>',
+      green: '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="21"/><rect class="h" x="21.800" y="12" width="4.400" height="15" rx="2.200"/><circle class="h" cx="24" cy="34" r="2.800"/></svg>'
+    };
+    const LV = {
+      red: 4,
+      yellow: 3,
+      blue: 2,
+      green: 1
+    };
+    const BTN = {
+      cam: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.500-2.500h7L17 8h3v11H4z"/><circle cx="12" cy="13.500" r="3.500"/></svg>',
+      up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V5M7.500 9.500L12 5l4.500 4.500M5 19h14"/></svg>',
+      tri: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><path d="M6 4.500v15l13-7.500z"/></svg>',
+      pause: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><rect x="5.500" y="4.500" width="5" height="15" rx="1.500"/><rect x="13.500" y="4.500" width="5" height="15" rx="1.500"/></svg>',
+      stop: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><rect x="5.500" y="5.500" width="13" height="13" rx="2.500"/></svg>'
+    };
+    /* ---------- hero scene: farmer spraying with the wind at his back ---------- */
+    function scene() {
+      let p = '',
+        i, j, k;
+      for (i = 0; i < 3; i++) {
+        const y = 56 + i * 18;
+        p += '<path d="M' + (24 + i * 8) + ' ' + y + 'H' + (112 + i * 8) + 'M' + (104 + i * 8) + ' ' + (y - 5) + 'L' + (
+            112 + i * 8) + ' ' + y + 'L' + (104 + i * 8) + ' ' + (y + 5) +
+          '" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"/>'
+      }
+      let sp = '';
+      [10, 18, 26, 34, 43].forEach((d, n) => {
+        [-24, -12, 0, 12, 24].forEach(a => {
+          const r = (a + 12) * Math.PI / 180;
+          sp += '<circle cx="' + (326 + d * Math.cos(r)).toFixed(1) + '" cy="' + (114 + d * Math.sin(r))
+            .toFixed(1) + '" r="' + (2.400 - n * .250).toFixed(2) + '"/>'
+        })
+      });
+      let rows = '';
+      for (i = 0; i < 5; i++) {
+        const y = 160 + i * 10;
+        rows += '<path d="M0 ' + y + 'H560" stroke="var(--soil2)" stroke-width="3" opacity=".7"/>';
+        for (k = (i % 2) * 13 + 6; k < 560; k += 26) {
+          rows += '<path d="M' + k + ' ' + y + 'q-7-8 0-17q7 9 0 17z" fill="var(--crop)"/><path d="M' + k + ' ' + y +
+            'q-9-3-10-9q8 0 10 9z" fill="var(--crop)" opacity=".8"/>'
+        }
+      }
+      return '<svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" focusable="false">' +
+        '<rect width="560" height="210" fill="var(--sky)"/><circle cx="486" cy="46" r="22" fill="var(--sun)"/>' +
+        '<ellipse cx="380" cy="34" rx="30" ry="8" fill="var(--cloud)" opacity=".55"/><ellipse cx="400" cy="27" rx="20" ry="7" fill="var(--cloud)" opacity=".55"/><ellipse cx="90" cy="26" rx="26" ry="7" fill="var(--cloud)" opacity=".45"/>' +
+        '<path d="M0 120C80 88 150 98 230 118S400 98 470 108 540 102 560 100V210H0z" fill="var(--hill1)"/>' +
+        '<path d="M0 142C90 120 170 130 260 140S430 124 560 132V210H0z" fill="var(--hill2)"/>' +
+        '<rect y="150" width="560" height="60" fill="var(--soil)"/>' + p
+        /* farmer */
+        +
+        '<rect x="196" y="78" width="21" height="42" rx="8" fill="#3b82c4"/><rect x="202" y="71" width="9" height="8" rx="2" fill="#1f4e79"/>' +
+        '<rect x="219" y="118" width="10" height="34" rx="3" fill="#3d4a5c"/><rect x="232" y="118" width="10" height="34" rx="3" fill="#3d4a5c"/><rect x="216" y="147" width="15" height="7" rx="3" fill="#262626"/><rect x="231" y="147" width="15" height="7" rx="3" fill="#262626"/>' +
+        '<path d="M213 82Q231 71 248 82L246 126H215z" fill="#f4f1e6" stroke="#d8d3c2" stroke-width="1.500"/>' +
+        '<path d="M214 86q9 14 0 30" fill="none" stroke="#1f4e79" stroke-width="3"/>' +
+        '<path d="M242 88Q258 92 268 100" fill="none" stroke="#f4f1e6" stroke-width="11" stroke-linecap="round"/><circle cx="271" cy="101" r="6.500" fill="#f2c230"/>' +
+        '<path d="M274 102L326 115" stroke="#33393f" stroke-width="4" stroke-linecap="round"/><path d="M207 118C208 140 252 136 264 106" fill="none" stroke="#33393f" stroke-width="3"/>' +
+        '<circle cx="231" cy="60" r="12.500" fill="#b8805a"/>' +
+        '<path d="M217 58Q215 38 231 36Q248 38 246 58Q231 51 217 58z" fill="#e8892b"/><path d="M219 51Q231 44 244 51" fill="none" stroke="#c46c14" stroke-width="2"/><path d="M217 55q-9 6-6 17q5-2 8-8z" fill="#e8892b"/>' +
+        '<path d="M220 61H243V66Q243 75 231.500 76Q220 75 220 66z" fill="#fff" stroke="#c9d1c9" stroke-width="1"/><circle cx="238" cy="56" r="1.800" fill="#1d1d1d"/>' +
+        '<g fill="#e6f5fb" opacity=".95">' + sp + '</g>' + rows + '</svg>'
+    }
+    /* ---------- state ---------- */
+    let lg = 'hi',
+      cur = null,
+      tok = 0,
+      chunks = [],
+      ci = 0,
+      st = 'idle';
+    const $ = i => document.getElementById(i);
+
+    function setCtl() {
+      const s = L[lg], t = CT[lg], spk = $('spk');
+      if (st === 'playing') spk.innerHTML = BTN.pause + '<span>' + t.pz + '</span>';
+      else if (st === 'paused') spk.innerHTML = BTN.tri + '<span>' + t.rsm + '</span>';
+      else spk.innerHTML = BTN.tri + '<span>' + s.spk + '</span>';
+      $('stp').disabled = st === 'idle';
+      $('stp').innerHTML = BTN.stop + '<span>' + t.stp + '</span>'
+    }
+
+    function halt() {
+      tok++;
+      st = 'idle';
+      try {
+        speechSynthesis.cancel()
+      } catch (e) {}
+      setCtl()
+    }
+
+    function classify(r, g, b) {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      const m = Math.max(r, g, b),
+        n = Math.min(r, g, b),
+        d = m - n;
+      if (m < .25 || d / m < .35) return null;
+      let h = d === 0 ? 0 : m === r ? ((g - b) / d) % 6 : m === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      h = (h * 60 + 360) % 360;
+      if (h < 20 || h > 340) return 'red';
+      if (h > 38 && h < 68) return 'yellow';
+      if (h > 85 && h < 165) return 'green';
+      if (h > 190 && h < 255) return 'blue';
+      return null
+    }
+
+    function voices() {
+      try {
+        return speechSynthesis.getVoices() || []
+      } catch (e) {
+        return []
+      }
+    }
+
+    function pickVoice() {
+      const s = L[lg],
+        p = s.lang.slice(0, 2),
+        v = voices();
+      let m = v.find(x => x.lang && x.lang.replace('_', '-').toLowerCase().startsWith(p));
+      if (!m && lg === 'mr') m = v.find(x => x.lang && x.lang.replace('_', '-').toLowerCase().startsWith('hi'));
+      return {
+        voice: m || null,
+        exact: !!(m && m.lang.replace('_', '-').toLowerCase().startsWith(p)),
+        known: v.length > 0
+      }
+    }
+
+    function note() {
+      const n = $('vnote');
+      if (lg !== 'mr' || !cur) {
+        n.hidden = true;
+        return
+      }
+      const p = pickVoice();
+      n.textContent = L.mr.vnote;
+      n.hidden = !(p.known && !p.exact)
+    }
+
+    function steps(s) {
+      return (s.emg.match(/[^.।]+[.।]?/g) || [s.emg]).map(x => x.trim()).filter(Boolean)
+    }
+
+    function list(arr, icons, types) {
+      return arr.map((x, i) => '<li class="' + (types[i] || 'do') + '"><span class="ic">' + (IC[icons[i]] || IC.hosp) +
+        '</span><span>' + x + '</span></li>').join('')
+    }
+
+    function ui() {
+      halt();
+      const s = L[lg];
+      $('t').textContent = s.t;
+      $('sub').textContent = s.sub;
+      $('off').textContent = s.off;
+      $('pick').innerHTML = BTN.cam + '<span>' + s.pick + '</span>';
+      $('upl').innerHTML = BTN.up + '<span>' + UP[lg] + '</span>';
+      $('hint').textContent = s.hint;
+      $('or').textContent = s.or;
+      $('err').textContent = s.err;
+      $('rh').textContent = s.rh;
+      $('eh').textContent = s.eh;
+      $('rules').innerHTML = list(s.rules, RI, RT);
+      $('emg').innerHTML = list(steps(s), EI, ET);
+      $('sw').innerHTML = '';
+      Object.keys(C).forEach(k => {
+        const b = document.createElement('button');
+        b.style.background = C[k].c;
+        b.style.color = C[k].f;
+        b.style.setProperty('--bandc', C[k].c);
+        b.innerHTML = BI[k];
+        b.setAttribute('aria-label', C[k][lg][0]);
+        b.onclick = () => show(k);
+        $('sw').appendChild(b)
+      });
+      Object.keys(LB).forEach(k => $(LB[k]).setAttribute('aria-pressed', lg === k));
+      document.documentElement.lang = lg;
+      if (cur) show(cur, true);
+      note()
+    }
+
+    function show(k, quiet) {
+      cur = k;
+      $('err').style.display = 'none';
+      const c = C[k],
+        t = c[lg];
+      const b = $('band');
+      b.style.background = c.c;
+      b.style.color = c.f;
+      b.style.setProperty('--bandc', c.c);
+      $('bi').innerHTML = BI[k];
+      $('rt').textContent = t[0];
+      $('rs').textContent = t[1];
+      $('gg').innerHTML = [1, 2, 3, 4].map(n => '<span class="' + (n <= LV[k] ? 'on' : '') + '"></span>').join('');
+      $('gg').setAttribute('aria-label', LV[k] + '/4');
+      $('res').style.display = 'block';
+      note();
+      if (!quiet) {
+        $('res').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        speak()
+      }
+    }
+
+    function mkChunks() {
+      const s = L[lg],
+        t = C[cur][lg];
+      return [t[0] + '. ' + t[1]].concat(s.rules, steps(s))
+    }
+
+    function say(i) {
+      if (i >= chunks.length) {
+        st = 'idle';
+        setCtl();
+        return
+      }
+      ci = i;
+      const my = tok;
+      try {
+        const s = L[lg],
+          u = new SpeechSynthesisUtterance(chunks[i]),
+          p = pickVoice();
+        u.lang = p.voice ? p.voice.lang : s.lang;
+        if (p.voice) u.voice = p.voice;
+        u.rate = .9;
+        u.onend = () => {
+          if (my === tok) say(i + 1)
+        };
+        u.onerror = () => {
+          if (my === tok) {
+            st = 'idle';
+            setCtl()
+          }
+        };
+        speechSynthesis.speak(u)
+      } catch (e) {
+        st = 'idle';
+        setCtl()
+      }
+    }
+
+    function speak() {
+      if (!cur) return;
+      halt();
+      chunks = mkChunks();
+      st = 'playing';
+      setCtl();
+      say(0)
+    }
+    $('emi').innerHTML = IC.cross;
+    $('scene').innerHTML = scene();
+    $('lhi').onclick = () => {
+      lg = 'hi';
+      ui()
+    };
+    $('lmr').onclick = () => {
+      lg = 'mr';
+      ui()
+    };
+    $('len').onclick = () => {
+      lg = 'en';
+      ui()
+    };
+    $('stp').onclick = halt;
+    $('spk').onclick = () => {
+      if (st === 'idle') speak();
+      else if (st === 'playing') {
+        tok++;
+        try {
+          speechSynthesis.cancel()
+        } catch (e) {}
+        st = 'paused';
+        setCtl()
+      } else if (st === 'paused') {
+        st = 'playing';
+        say(ci)
+      }
+    };
+    try {
+      speechSynthesis.addEventListener('voiceschanged', note)
+    } catch (e) {}
+    $('pick').onkeydown = e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        $('f').click()
+      }
+    };
+    $('upl').onkeydown = e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        $('g').click()
+      }
+    };
+    const cv = $('cv'),
+      cx = cv.getContext('2d', {
+        willReadFrequently: true
+      });
+    const ld = e => {
+      const f = e.target.files[0];
+      if (!f) return;
+      const im = new Image();
+      im.onload = () => {
+        const w = Math.min(640, im.width),
+          h = Math.round(im.height * w / im.width);
+        cv.width = w;
+        cv.height = h;
+        cx.drawImage(im, 0, 0, w, h);
+        cv.style.display = 'block';
+        $('hint').style.display = 'block';
+        URL.revokeObjectURL(im.src)
+      };
+      im.src = URL.createObjectURL(f)
+    };
+    $('f').onchange = ld;
+    $('g').onchange = ld;
+    cv.onclick = e => {
+      const r = cv.getBoundingClientRect(),
+        x = Math.round((e.clientX - r.left) * cv.width / r.width),
+        y = Math.round((e.clientY - r.top) * cv.height / r.height),
+        R = 10;
+      const d = cx.getImageData(Math.max(0, x - R), Math.max(0, y - R), 2 * R, 2 * R).data;
+      let a = 0,
+        g = 0,
+        b = 0,
+        n = d.length / 4;
+      for (let i = 0; i < d.length; i += 4) {
+        a += d[i];
+        g += d[i + 1];
+        b += d[i + 2]
+      }
+      const k = classify(a / n, g / n, b / n);
+      if (k) show(k);
+      else {
+        $('err').style.display = 'block'
+      }
+    };
+    ui();
+    /* ---------- offline support: if this page and sw.js are hosted together, cache the app for repeat offline use ---------- */
+    try {
+      if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+        navigator.serviceWorker.register('sw.js').catch(() => {})
+      }
+    } catch (e) {}
+  </script>
+
+</body>
+
+</html>
