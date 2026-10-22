@@ -1,6 +1,4 @@
-/* Kisan Suraksha — offline cache.
-   Everything the app needs (HTML, CSS, JS, SVG icons) lives inside the one
-   page file, so caching just that page is enough for full offline use. */
+
 const CACHE = 'kisan-suraksha-v1';
 const APP_URL = self.registration.scope; // the folder this file was registered from
 
